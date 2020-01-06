@@ -13,6 +13,7 @@ public class GUI extends JFrame implements ActionListener
     private JButton a_playButton = new JButton("Play");
     private JButton a_pauseButton = new JButton("Pause");
     private JButton a_stopButton = new JButton("Stop");
+    private JButton a_muteButton = new JButton("Mute"); 
     
     //information panel attrbriutes
     private JLabel a_songName = new JLabel("No Current Song");
@@ -39,6 +40,7 @@ public class GUI extends JFrame implements ActionListener
     //variables
     private double guiVolume;
     private boolean guiMute;
+
     
     GUITester player = new GUITester(); //constructor for the player class
     
@@ -61,10 +63,15 @@ public class GUI extends JFrame implements ActionListener
         a_informationPanel.add(a_rightB);
         a_informationPanel.add(a_timeSlider);
       
+        
+        
         //controls buttons
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
         a_controlsPanel.add(a_stopButton);
+        a_controlsPanel.add(a_muteButton);
+        a_muteButton.setPreferredSize(new Dimension(50, 20)); //mute button
+        a_muteButton.setFont(new Font("Arial", Font.PLAIN, 5)); //mute button
         a_controlsPanel.add(a_volumeSlider);
         a_volumeSlider.setPreferredSize(new Dimension(75, 10));
         
@@ -72,6 +79,7 @@ public class GUI extends JFrame implements ActionListener
         a_playButton.addActionListener(this);
         a_pauseButton.addActionListener(this);
         a_stopButton.addActionListener(this);
+        a_muteButton.addActionListener(this);
         a_menuItemOpen.addActionListener(this);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,7 +96,7 @@ public class GUI extends JFrame implements ActionListener
         a_frame.setResizable(false);
         
         //need to call getMute and getVolume
-        
+        if(getMute() == true){guiMute = true;System.out.println(getMute());}else{guiMute=false;} //check for the mute button icon
         player.initialiseFiles();
     }
     
@@ -109,6 +117,11 @@ public class GUI extends JFrame implements ActionListener
         if (_actionevent.getSource() == a_stopButton)
         {
             stop();
+        }
+        
+        if (_actionevent.getSource() == a_muteButton) //mute functionality
+        {
+            mute();
         }
         
         if (_actionevent.getSource() == a_menuItemOpen)
@@ -148,10 +161,16 @@ public class GUI extends JFrame implements ActionListener
         //player.setVolume(); //double guiVolume
     }
     
+    public boolean getMute()
+    {
+        boolean l_isMute = player.getMute();
+        return l_isMute;
+    }
+    
     public void mute()
     {
         //need to setMute
-        //player.setMute(); //boolean guiMute
+        player.setMute(guiMute); //boolean guiMute
     }
     
     public void restart()
@@ -161,7 +180,14 @@ public class GUI extends JFrame implements ActionListener
     
     public void songName()
     {
-        String l_name = player.getCurrentTrackName(); //get name of track
-        a_songName.setText(l_name); //setName
+        try
+        {
+            String l_name = player.getCurrentTrackName(); //get name of track
+            a_songName.setText(l_name); //setName
+        }
+        catch(Exception e)
+        {
+            a_songName.setText("No Current Song");
+        }
     }
 }

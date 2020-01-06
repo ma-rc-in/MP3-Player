@@ -148,7 +148,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     
    //public Duration getTime(){}
     
-    //public boolean getMute(){}
+    public boolean getMute(){return true;}
     
     //public double getVolume(){}
     
