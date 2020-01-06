@@ -17,11 +17,13 @@ public class GUI extends JFrame implements ActionListener
     //information panel attrbriutes
     private JLabel a_songName = new JLabel("No Current Song");
     private JLabel a_currentTime = new JLabel("0:00");
-    private JLabel a_totalTime = new JLabel("0:00");
-    
+    private JLabel a_totalTime = new JLabel("0:00"); 
     private JLabel a_leftB = new JLabel("(");
     private JLabel a_rightB = new JLabel(")");
     private JLabel a_slash = new JLabel("/");
+    
+    //slider
+    private JSlider a_timeSlider = new JSlider();
     
     //pannels
     //DELETE LATER - can have multiple j_pannels, like a <div> in html
@@ -38,8 +40,6 @@ public class GUI extends JFrame implements ActionListener
     private boolean guiMute;
     
     GUITester player = new GUITester(); //constructor for the player class
-    
-  
     
     public GUI()
     {
@@ -58,6 +58,7 @@ public class GUI extends JFrame implements ActionListener
         a_informationPanel.add(a_slash);
         a_informationPanel.add(a_totalTime); //total time label (default 0:00)
         a_informationPanel.add(a_rightB);
+        a_informationPanel.add(a_timeSlider);
         
         
         //controls buttons
