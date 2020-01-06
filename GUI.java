@@ -1,6 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class GUI extends JFrame implements ActionListener
 {
@@ -18,14 +20,16 @@ public class GUI extends JFrame implements ActionListener
     //information panel attrbriutes
     private JLabel a_songName = new JLabel("No Current Song");
     private JLabel a_currentTime = new JLabel("0:00");
-    private JLabel a_totalTime = new JLabel("0:00"); 
+    
     private JLabel a_leftB = new JLabel("(");
     private JLabel a_rightB = new JLabel(")");
     private JLabel a_slash = new JLabel("/");
     
     //sliders
-    private JSlider a_timeSlider = new JSlider();
+    private JSlider a_timeSlider = new JSlider(1, 100);
     private JSlider a_volumeSlider = new JSlider();
+
+    
     
     //pannels
     //DELETE LATER - can have multiple j_pannels, like a <div> in html
@@ -38,14 +42,15 @@ public class GUI extends JFrame implements ActionListener
     private JMenuItem a_menuItemOpen = new JMenuItem("Open");
     
     //variables
-    private double guiVolume;
-    private boolean guiMute;
+    private boolean a_guiMute;
 
     
     GUITester player = new GUITester(); //constructor for the player class
     
     public GUI()
     {
+        
+        
         //creation
         add(a_controlsPanel);
         add(a_informationPanel);
@@ -56,15 +61,13 @@ public class GUI extends JFrame implements ActionListener
         
         //information panel
         a_informationPanel.add(a_songName); //name of the song label
+        a_informationPanel.add(a_timeSlider);
+        a_timeSlider.setPreferredSize(new Dimension(325, 20));
         a_informationPanel.add(a_leftB);
         a_informationPanel.add(a_currentTime); //current time label (default 0:00)
-        a_informationPanel.add(a_slash);
-        a_informationPanel.add(a_totalTime); //total time label (default 0:00)
         a_informationPanel.add(a_rightB);
-        a_informationPanel.add(a_timeSlider);
       
-        
-        
+
         //controls buttons
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
@@ -95,8 +98,29 @@ public class GUI extends JFrame implements ActionListener
         a_frame.setVisible(true);
         a_frame.setResizable(false);
         
-        //need to call getMute and getVolume
-        if(getMute() == true){guiMute = true;System.out.println(getMute());}else{guiMute=false;} //check for the mute button icon
+        //calls getMute and volume when starting
+        if(getMute() == true){a_guiMute = true;System.out.println(getMute());}else{a_guiMute=false;} //check for the mute button icon
+        getVolume(); //this is used to make sure that the volume is correct;
+        
+        //used to get the volumesliders poistion
+        a_volumeSlider.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e)
+        {setVolume();}});
+        
+        a_timeSlider.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e)
+        {setTime();}});
+        
+        //timer, updates every 0.1 seconds
+        ActionListener updateTime = new ActionListener()
+        {
+            public void actionPerformed(ActionEvent _actionevent)
+            {getTime();}
+        };
+        
+        Timer timer = new Timer(100, updateTime);
+        timer.start();
+        
         player.initialiseFiles();
     }
     
@@ -104,7 +128,11 @@ public class GUI extends JFrame implements ActionListener
     {
         if (_actionevent.getSource() == a_playButton)
         {
-            try{songName();play();}
+            try
+            {
+                songName();
+                play();
+            }
             catch(Exception e) //no media selected
             {
                 JOptionPane.showMessageDialog(null, "There seems to be a problem."); //change
@@ -121,7 +149,7 @@ public class GUI extends JFrame implements ActionListener
         
         if (_actionevent.getSource() == a_muteButton) //mute functionality
         {
-            mute();
+            setMute();
         }
         
         if (_actionevent.getSource() == a_menuItemOpen)
@@ -131,8 +159,8 @@ public class GUI extends JFrame implements ActionListener
         }
 
     }
-    
-    //C Requirements
+   
+    //***C Requirements***
     public void play()
     {
         //getCurrentTrackName(); //need to call from player
@@ -154,30 +182,33 @@ public class GUI extends JFrame implements ActionListener
         player.openFile();
     }
     
-    //B Requirements 
-    public void volume()
+    //***B Requirements*** 
+    public void getVolume()
     {
-        //need to set the volume
-        //player.setVolume(); //double guiVolume
+        //double l_volume = player.getVolume();
+        //a_volumeSlider.setValue(l_volume);
+        //return l_volume;
     }
     
+    public void setVolume()
+    {
+        //need to set the volume
+        double l_volume = a_volumeSlider.getValue();
+        player.setVolume(l_volume); //double guiVolume
+    }  
+        
     public boolean getMute()
     {
         boolean l_isMute = player.getMute();
         return l_isMute;
     }
     
-    public void mute()
+    public void setMute()
     {
         //need to setMute
-        player.setMute(guiMute); //boolean guiMute
+        player.setMute(a_guiMute); //boolean guiMute
     }
-    
-    public void restart()
-    {
-        
-    }
-    
+       
     public void songName()
     {
         try
@@ -189,5 +220,17 @@ public class GUI extends JFrame implements ActionListener
         {
             a_songName.setText("No Current Song");
         }
+    }
+    
+    public void getTime()
+    {
+        //Double l_time = player.getTime();
+        //a_currentTime.setText(l_time);    
+    }
+    
+    //***C Requirements***
+    public void setTime()
+    {
+        
     }
 }
