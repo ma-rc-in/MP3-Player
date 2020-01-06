@@ -145,11 +145,19 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public void setVolume(double _volume){
         //a_mediaPlayer.setVolume
     }
+<<<<<<< HEAD
 
     //public Duration getTime(){}
 
     //public boolean getMute(){}
 
+=======
+    
+   //public Duration getTime(){}
+    
+    public boolean getMute(){return true;}
+    
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     //public double getVolume(){}
 
     //public void setTime(Duration _time){}

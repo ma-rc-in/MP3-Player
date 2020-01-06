@@ -1,6 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class GUI extends JFrame implements ActionListener
 {
@@ -13,18 +15,33 @@ public class GUI extends JFrame implements ActionListener
     private JButton a_playButton = new JButton("Play");
     private JButton a_pauseButton = new JButton("Pause");
     private JButton a_stopButton = new JButton("Stop");
+<<<<<<< HEAD
 
+=======
+    private JButton a_muteButton = new JButton("Mute"); 
+    
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     //information panel attrbriutes
     private JLabel a_songName = new JLabel("No Current Song");
     private JLabel a_currentTime = new JLabel("0:00");
-    private JLabel a_totalTime = new JLabel("0:00"); 
+    
     private JLabel a_leftB = new JLabel("(");
     private JLabel a_rightB = new JLabel(")");
     private JLabel a_slash = new JLabel("/");
+<<<<<<< HEAD
 
     //slider
     private JSlider a_timeSlider = new JSlider();
 
+=======
+    
+    //sliders
+    private JSlider a_timeSlider = new JSlider(1, 100);
+    private JSlider a_volumeSlider = new JSlider();
+
+    
+    
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     //pannels
     //DELETE LATER - can have multiple j_pannels, like a <div> in html
     private JPanel a_controlsPanel = new JPanel(); //used for play,stop and pause
@@ -36,13 +53,21 @@ public class GUI extends JFrame implements ActionListener
     private JMenuItem a_menuItemOpen = new JMenuItem("Open");
 
     //variables
+<<<<<<< HEAD
     private double guiVolume;
     private boolean guiMute;
 
+=======
+    private boolean a_guiMute;
+
+    
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     GUITester player = new GUITester(); //constructor for the player class
 
     public GUI()
     {
+        
+        
         //creation
         add(a_controlsPanel);
         add(a_informationPanel);
@@ -53,22 +78,36 @@ public class GUI extends JFrame implements ActionListener
 
         //information panel
         a_informationPanel.add(a_songName); //name of the song label
+        a_informationPanel.add(a_timeSlider);
+        a_timeSlider.setPreferredSize(new Dimension(325, 20));
         a_informationPanel.add(a_leftB);
         a_informationPanel.add(a_currentTime); //current time label (default 0:00)
-        a_informationPanel.add(a_slash);
-        a_informationPanel.add(a_totalTime); //total time label (default 0:00)
         a_informationPanel.add(a_rightB);
+<<<<<<< HEAD
         a_informationPanel.add(a_timeSlider);
+=======
+      
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
 
         //controls buttons
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
         a_controlsPanel.add(a_stopButton);
+<<<<<<< HEAD
 
+=======
+        a_controlsPanel.add(a_muteButton);
+        a_muteButton.setPreferredSize(new Dimension(50, 20)); //mute button
+        a_muteButton.setFont(new Font("Arial", Font.PLAIN, 5)); //mute button
+        a_controlsPanel.add(a_volumeSlider);
+        a_volumeSlider.setPreferredSize(new Dimension(75, 10));
+        
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
         //action listeners
         a_playButton.addActionListener(this);
         a_pauseButton.addActionListener(this);
         a_stopButton.addActionListener(this);
+        a_muteButton.addActionListener(this);
         a_menuItemOpen.addActionListener(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,13 +118,40 @@ public class GUI extends JFrame implements ActionListener
         a_frame.getContentPane().add(BorderLayout.SOUTH, a_controlsPanel);
 
         //a frame layout
-        a_frame.setSize(350,200);
+        a_frame.setSize(400,200); //350 200
         a_frame.setLocationRelativeTo(null);
         a_frame.setVisible(true);
         a_frame.setResizable(false);
+<<<<<<< HEAD
 
         //need to call getMute and getVolume
 
+=======
+        
+        //calls getMute and volume when starting
+        if(getMute() == true){a_guiMute = true;System.out.println(getMute());}else{a_guiMute=false;} //check for the mute button icon
+        getVolume(); //this is used to make sure that the volume is correct;
+        
+        //used to get the volumesliders poistion
+        a_volumeSlider.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e)
+        {setVolume();}});
+        
+        a_timeSlider.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e)
+        {setTime();}});
+        
+        //timer, updates every 0.1 seconds
+        ActionListener updateTime = new ActionListener()
+        {
+            public void actionPerformed(ActionEvent _actionevent)
+            {getTime();}
+        };
+        
+        Timer timer = new Timer(100, updateTime);
+        timer.start();
+        
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
         player.initialiseFiles();
     }
 
@@ -93,7 +159,11 @@ public class GUI extends JFrame implements ActionListener
     {
         if (_actionevent.getSource() == a_playButton)
         {
-            try{songName();play();}
+            try
+            {
+                songName();
+                play();
+            }
             catch(Exception e) //no media selected
             {
                 JOptionPane.showMessageDialog(null, "There seems to be a problem."); //change
@@ -107,7 +177,16 @@ public class GUI extends JFrame implements ActionListener
         {
             stop();
         }
+<<<<<<< HEAD
 
+=======
+        
+        if (_actionevent.getSource() == a_muteButton) //mute functionality
+        {
+            setMute();
+        }
+        
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
         if (_actionevent.getSource() == a_menuItemOpen)
         {
             open();
@@ -115,8 +194,13 @@ public class GUI extends JFrame implements ActionListener
         }
 
     }
+<<<<<<< HEAD
 
     //C Requirements
+=======
+   
+    //***C Requirements***
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     public void play()
     {
         //getCurrentTrackName(); //need to call from player
@@ -137,28 +221,76 @@ public class GUI extends JFrame implements ActionListener
     {
         player.openFile();
     }
+<<<<<<< HEAD
 
     //B Requirements 
     public void volume()
+=======
+    
+    //***B Requirements*** 
+    public void getVolume()
+    {
+        //double l_volume = player.getVolume();
+        //a_volumeSlider.setValue(l_volume);
+        //return l_volume;
+    }
+    
+    public void setVolume()
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     {
         //need to set the volume
-        //player.setVolume(); //double guiVolume
+        double l_volume = a_volumeSlider.getValue();
+        player.setVolume(l_volume); //double guiVolume
+    }  
+        
+    public boolean getMute()
+    {
+        boolean l_isMute = player.getMute();
+        return l_isMute;
     }
+<<<<<<< HEAD
 
     public void mute()
+=======
+    
+    public void setMute()
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     {
         //need to setMute
-        //player.setMute(); //boolean guiMute
+        player.setMute(a_guiMute); //boolean guiMute
     }
+<<<<<<< HEAD
 
     public void restart()
     {
 
     }
 
+=======
+       
+>>>>>>> 2ebab4274e17c97cbdb223e8e556b4c77ce96412
     public void songName()
     {
-        String l_name = player.getCurrentTrackName(); //get name of track
-        a_songName.setText(l_name); //setName
+        try
+        {
+            String l_name = player.getCurrentTrackName(); //get name of track
+            a_songName.setText(l_name); //setName
+        }
+        catch(Exception e)
+        {
+            a_songName.setText("No Current Song");
+        }
+    }
+    
+    public void getTime()
+    {
+        //Double l_time = player.getTime();
+        //a_currentTime.setText(l_time);    
+    }
+    
+    //***C Requirements***
+    public void setTime()
+    {
+        
     }
 }
