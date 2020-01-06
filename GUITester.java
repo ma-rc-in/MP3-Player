@@ -12,7 +12,6 @@ import javafx.util.Duration;
 import java.util.*;
 
 
-
 public class GUITester extends JFrame implements ActionListener//, danPlayer
 {
     private JButton a_button = new JButton("Play");
@@ -29,9 +28,9 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public String fileName;
     public String pathFile;
     File myFile = null;
-    
     private boolean _mute = false;
-        
+    private double _volume;
+
     public void GUITester()
     {
         add(a_panel);
@@ -51,22 +50,21 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         setSize(600,300);
         setLocationRelativeTo(null);
         setVisible(true);
-        
-        
+
         //String bip = "file1.mp3";  
         //Media hit = new Media(new File(bip).toURI().toString());
         //a_mediaPlayer = new MediaPlayer(hit);
-        
+
         initialiseFiles();
     }    
-    
+
     public void initialiseFiles(){
         JFXPanel fxPanel = new JFXPanel();
         String bip = "file1.mp3";  
         Media hit = new Media(new File(bip).toURI().toString());
         a_mediaPlayer = new MediaPlayer(hit);
     }
-    
+
     public void actionPerformed(ActionEvent _ae)
     {
         if (_ae.getSource() == a_button)play();
@@ -74,27 +72,27 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         if (_ae.getSource() == a_button3)stop();  
         if (_ae.getSource() == openFileButton)openFile();
         if (_ae.getSource() == a_button4)setMute(_mute);
-        
+
     }
-    
+
     public void play()
     {
         //System.out.println("Play!");
         a_mediaPlayer.play();
     }
-    
+
     public void pause()
     {
         //System.out.println("Pause!");
         a_mediaPlayer.pause();
     }
-    
+
     public void stop()
     {
         //System.out.println("Stop!");
         a_mediaPlayer.stop();
     }
-    
+
     public void openFile()
     {
         chooseFile = new JFileChooser();
@@ -104,71 +102,67 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         chooseFile.setAcceptAllFileFilterUsed(false);        
         FileNameExtensionFilter filter = new FileNameExtensionFilter("MP3 files", "mp3");
         chooseFile.addChoosableFileFilter(filter);
-        
+
         if(chooseFile.showOpenDialog(openFileButton)==JFileChooser.APPROVE_OPTION){
             myFile = chooseFile.getSelectedFile();
             fileName = chooseFile.getSelectedFile().getName();
             pathFile = chooseFile.getSelectedFile().getPath();}
+
+        pathFile = pathFile.replace("\\", "/"); 
+        Media songPlay = new Media(new File(pathFile).toURI().toString());
+        a_mediaPlayer.stop();       
+        a_mediaPlayer = new MediaPlayer(songPlay);
+        a_mediaPlayer.setAutoPlay(true);     
+        getCurrentTrackName();
         
-       pathFile = pathFile.replace("\\", "/"); 
-       Media songPlay = new Media(new File(pathFile).toURI().toString());
-       //a_mediaPlayer.stop();       
-       a_mediaPlayer = new MediaPlayer(songPlay);
-       a_mediaPlayer.setAutoPlay(true);     
-       getCurrentTrackName();
+        songPlay = _volume;
     }
-    
+
     public String getCurrentTrackName(){
-                 
-       if (fileName.indexOf(".") > 0){
-           fileName = fileName.substring(0, fileName.lastIndexOf("."));}
-       
-       fileNameLabel.setText("Current song: " + fileName);    
-       
-       return fileName;
+
+        if (fileName.indexOf(".") > 0){
+            fileName = fileName.substring(0, fileName.lastIndexOf("."));}
+
+        //fileNameLabel.setText("Current song: " + fileName);    
+
+        return fileName;
     }
-    
+
     public void setMute(boolean _setMute){
-       if (! _mute){
-       a_button4.setText("Unmute");
-       a_mediaPlayer.muteProperty();      
-       a_mediaPlayer.setMute(true); 
-       
-      }
-      else {
-       a_button4.setText("Mute");
-       a_mediaPlayer.setMute(false);         
-      }
-      _mute = ! _mute;
+        if (! _mute){
+            a_button4.setText("Unmute");
+            a_mediaPlayer.muteProperty();      
+            a_mediaPlayer.setMute(true); 
+
+        }      
+        else {
+            a_button4.setText("Mute");
+            a_mediaPlayer.setMute(false);         
+        }
+        _mute = ! _mute;
     }
-    
+
     public void setVolume(double _volume){
-    
+        //a_mediaPlayer.setVolume
     }
-    
-   //public Duration getTime(){}
-    
+
+    //public Duration getTime(){}
+
     //public boolean getMute(){}
-    
+
     //public double getVolume(){}
-    
+
     //public void setTime(Duration _time){}
-    
+
     //public void openPlayList(){}
-    
+
     //public ArrayList<String> getPlayList(){}
-     
+
     //public void playTrack(int _trackNo){}
-     
+
     //public void restart(){} 
-    
-    
+
 }
-   
-
-        
-
-
 
 
 
