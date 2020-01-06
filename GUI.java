@@ -39,6 +39,8 @@ public class GUI extends JFrame implements ActionListener
     
     GUITester player = new GUITester(); //constructor for the player class
     
+  
+    
     public GUI()
     {
         //creation
@@ -83,6 +85,8 @@ public class GUI extends JFrame implements ActionListener
         a_frame.setResizable(false);
         
         //need to call getMute and getVolume
+        
+        player.initialiseFiles();
     }
     
     public void actionPerformed(ActionEvent _actionevent)

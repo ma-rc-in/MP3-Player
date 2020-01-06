@@ -52,11 +52,20 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         setLocationRelativeTo(null);
         setVisible(true);
         
+        
+        //String bip = "file1.mp3";  
+        //Media hit = new Media(new File(bip).toURI().toString());
+        //a_mediaPlayer = new MediaPlayer(hit);
+        
+        initialiseFiles();
+    }    
+    
+    public void initialiseFiles(){
         JFXPanel fxPanel = new JFXPanel();
         String bip = "file1.mp3";  
         Media hit = new Media(new File(bip).toURI().toString());
         a_mediaPlayer = new MediaPlayer(hit);
-    }    
+    }
     
     public void actionPerformed(ActionEvent _ae)
     {
@@ -103,7 +112,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         
        pathFile = pathFile.replace("\\", "/"); 
        Media songPlay = new Media(new File(pathFile).toURI().toString());
-       a_mediaPlayer.stop();       
+       //a_mediaPlayer.stop();       
        a_mediaPlayer = new MediaPlayer(songPlay);
        a_mediaPlayer.setAutoPlay(true);     
        getCurrentTrackName();
