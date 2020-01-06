@@ -94,7 +94,7 @@ public class GUI extends JFrame implements ActionListener
     {
         if (_actionevent.getSource() == a_playButton)
         {
-            try{play();}
+            try{songName();play();}
             catch(Exception e) //no media selected
             {
                 JOptionPane.showMessageDialog(null, "There seems to be a problem."); //change
@@ -160,6 +160,6 @@ public class GUI extends JFrame implements ActionListener
     public void songName()
     {
         String l_name = player.getCurrentTrackName(); //get name of track
-        a_songName.setName(l_name); //setName
+        a_songName.setText(l_name); //setName
     }
 }
