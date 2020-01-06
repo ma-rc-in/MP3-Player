@@ -22,8 +22,9 @@ public class GUI extends JFrame implements ActionListener
     private JLabel a_rightB = new JLabel(")");
     private JLabel a_slash = new JLabel("/");
     
-    //slider
+    //sliders
     private JSlider a_timeSlider = new JSlider();
+    private JSlider a_volumeSlider = new JSlider();
     
     //pannels
     //DELETE LATER - can have multiple j_pannels, like a <div> in html
@@ -59,12 +60,13 @@ public class GUI extends JFrame implements ActionListener
         a_informationPanel.add(a_totalTime); //total time label (default 0:00)
         a_informationPanel.add(a_rightB);
         a_informationPanel.add(a_timeSlider);
-        
-        
+      
         //controls buttons
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
         a_controlsPanel.add(a_stopButton);
+        a_controlsPanel.add(a_volumeSlider);
+        a_volumeSlider.setPreferredSize(new Dimension(75, 10));
         
         //action listeners
         a_playButton.addActionListener(this);
@@ -80,7 +82,7 @@ public class GUI extends JFrame implements ActionListener
         a_frame.getContentPane().add(BorderLayout.SOUTH, a_controlsPanel);
         
         //a frame layout
-        a_frame.setSize(350,200);
+        a_frame.setSize(400,200); //350 200
         a_frame.setLocationRelativeTo(null);
         a_frame.setVisible(true);
         a_frame.setResizable(false);
