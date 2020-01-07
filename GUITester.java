@@ -28,10 +28,11 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public String fileName;
     public String pathFile;
     File myFile = null;
-    private boolean _mute = false;
     private double _volume;
     private double getVolumeValue;
+    private boolean _setMute;
     Media songPlay;
+    Media muted;
 
     public void GUITester()
     {
@@ -75,12 +76,10 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         if (_ae.getSource() == a_button2)pause();
         if (_ae.getSource() == a_button3)stop();  
         if (_ae.getSource() == openFileButton)openFile();
-        if (_ae.getSource() == a_button4)setMute(_mute);
+        if (_ae.getSource() == a_button4)setMute(_setMute);
         if (_ae.getSource() == a_button5)setVolume(_volume);
 
-
     }
-
     public void play()
     {
         //System.out.println("Play!");
@@ -122,7 +121,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         getCurrentTrackName();
         getVolume();
         getTime();
-
+        
 
         //  songPlay = _volume;
     }
@@ -138,9 +137,9 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public void setMute(boolean _setMute){
-        if (! _mute){
+        if (! _setMute){
             a_button4.setText("Unmute");
-            a_mediaPlayer.muteProperty();      
+            //a_mediaPlayer.muteProperty();      
             a_mediaPlayer.setMute(true); 
 
         }      
@@ -148,7 +147,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
             a_button4.setText("Mute");
             a_mediaPlayer.setMute(false);         
         }
-        _mute = ! _mute;
+        _setMute = ! _setMute;
     }
 
     public double setVolume(double _volume){                        
@@ -156,29 +155,27 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         a_mediaPlayer.setVolume(_volume);    
         return _volume;
     }
-    
+
     public Duration getTime(){
         Duration duration = new Duration(1);
-        
+
         //fileNameLabel.setText("Current song: " + duration.toSeconds());    
-        
+
         return duration;
     }
-    
-    
-    
-    //public boolean getMute(){}
 
-    //public Duration getTime(){}
-    //public boolean getMute(){}
     
-    //public Duration getTime(){}
+    public boolean getMute(){
+        boolean muted = a_mediaPlayer.isMute(); 
+        
+        System.out.println(muted);
 
-    public boolean getMute(){return true;}
-
+        return muted;  
+    }
+    
     public double getVolume(){
         getVolumeValue = a_mediaPlayer.getVolume();
-        
+
         fileNameLabel.setText("Current song: " + getVolumeValue);   
 
         return getVolumeValue;
@@ -195,5 +192,4 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     //public void restart(){} 
 
 }
-
 
