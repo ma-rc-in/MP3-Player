@@ -6,9 +6,10 @@ import javax.swing.event.ChangeListener;
 
 public class GUI extends JFrame implements ActionListener
 {
-
+    private static String[] test = {"1", "2", "3", "4", "5", "6", "7", "8"}; //delete
+    
+    
     //need to impletement try catch and make sure that everything is protected
-
     private JFrame a_frame = new JFrame("Music Player"); //JFrame
 
     //control panel attributes
@@ -16,25 +17,20 @@ public class GUI extends JFrame implements ActionListener
     private JButton a_pauseButton = new JButton("Pause");
     private JButton a_stopButton = new JButton("Stop");
     private JButton a_muteButton = new JButton("Mute");     
-
+    
     //information panel attrbriutes
     private JLabel a_songName = new JLabel("No Current Song");
-    private JLabel a_currentTime = new JLabel("0:00");
-    
-    private JLabel a_leftB = new JLabel("(");
-    private JLabel a_rightB = new JLabel(")");
-    private JLabel a_slash = new JLabel("/");
-    
- 
+    private JLabel a_currentTime = new JLabel("(0:00)");
+    private JList a_playlist = new JList(test);
+    private JScrollPane a_playlistSP = new JScrollPane(a_playlist);
     
     //sliders
     private JSlider a_timeSlider = new JSlider();
     private JSlider a_volumeSlider = new JSlider();
 
-  
     //pannels
     //DELETE LATER - can have multiple j_pannels, like a <div> in html
-    private JPanel a_controlsPanel = new JPanel(); //used for play,stop and pause
+    private JPanel a_controlsPanel = new JPanel(); //used for play,stop and pause , delete gridbaglayout
     private JPanel a_informationPanel = new JPanel(); //used for track name and time
 
     //menu bar
@@ -43,19 +39,17 @@ public class GUI extends JFrame implements ActionListener
     private JMenuItem a_menuItemOpen = new JMenuItem("Open");
 
     //variables
-
     private double guiVolume;
-    private boolean guiMute;
-
-
     private boolean a_guiMute;
-
-    
 
     GUITester player = new GUITester(); //constructor for the player class
 
     public GUI()
     {
+        //layout of the information panel (Layout Manager)
+        a_informationPanel.setLayout(new BoxLayout(a_informationPanel, BoxLayout.Y_AXIS));
+        a_controlsPanel.setLayout(new BoxLayout(a_controlsPanel, BoxLayout.X_AXIS));
+
         //creation
         add(a_controlsPanel);
         add(a_informationPanel);
@@ -63,15 +57,22 @@ public class GUI extends JFrame implements ActionListener
         //menu bar
         a_menuBar.add(a_file); //menu bar
         a_file.add(a_menuItemOpen); //menu bar item
-
-        //information panel
+        
+        //information panel (adding and alignment)
+        a_playlist.setVisibleRowCount(5);
+        a_playlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        a_playlistSP.setViewportView(a_playlist);
+        a_informationPanel.add(a_playlistSP); //playlist
+        a_playlist.setAlignmentX(Component.CENTER_ALIGNMENT);        
+        
         a_informationPanel.add(a_songName); //name of the song label
+        a_songName.setAlignmentX(Component.CENTER_ALIGNMENT);
         a_informationPanel.add(a_timeSlider);
+        a_timeSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         a_timeSlider.setPreferredSize(new Dimension(325, 20));
-        a_informationPanel.add(a_leftB);
         a_informationPanel.add(a_currentTime); //current time label (default 0:00)
-        a_informationPanel.add(a_rightB);
-
+        a_currentTime.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         //controls buttons
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
@@ -83,7 +84,6 @@ public class GUI extends JFrame implements ActionListener
         a_controlsPanel.add(a_volumeSlider);
         a_volumeSlider.setPreferredSize(new Dimension(75, 10));
         
-
         //action listeners
         a_playButton.addActionListener(this);
         a_pauseButton.addActionListener(this);
@@ -94,20 +94,18 @@ public class GUI extends JFrame implements ActionListener
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //frame layout
-        a_frame.getContentPane().add(BorderLayout.NORTH, a_menuBar);
-        a_frame.getContentPane().add(BorderLayout.CENTER, a_informationPanel);
-        a_frame.getContentPane().add(BorderLayout.SOUTH, a_controlsPanel);
-
+        a_frame.getContentPane().add(BorderLayout.PAGE_START, a_menuBar); // was north
+        a_frame.getContentPane().add(BorderLayout.CENTER, a_informationPanel); //was center
+        a_frame.getContentPane().add(BorderLayout.PAGE_END, a_controlsPanel); //was south
+             
         //a frame layout
-        a_frame.setSize(400,200); //350 200
+        a_frame.setSize(400,250); //400 150
         a_frame.setLocationRelativeTo(null);
         a_frame.setVisible(true);
         a_frame.setResizable(false);
 
-
-        //need to call getMute and getVolume
         //calls getMute and volume when starting
-        if(getMute() == true){a_guiMute = true;System.out.println(getMute());}else{a_guiMute=false;} //check for the mute button icon
+        if(getMute() == true){a_guiMute = true;}else{a_guiMute=false;} //check for the mute button icon
         getVolume(); //this is used to make sure that the volume is correct;
         
         //used to get the volumesliders poistion
@@ -129,11 +127,10 @@ public class GUI extends JFrame implements ActionListener
         Timer timer = new Timer(100, updateTime);
         timer.start();
         
-
         player.initialiseFiles();
     }
 
-    public void actionPerformed(ActionEvent _actionevent)
+    public void actionPerformed(ActionEvent _actionevent) //actions performed by buttons
     {
         if (_actionevent.getSource() == a_playButton)
         {
@@ -156,19 +153,16 @@ public class GUI extends JFrame implements ActionListener
             stop();
         }
 
-        
         if (_actionevent.getSource() == a_muteButton) //mute functionality
         {
             setMute();
         }
         
-
         if (_actionevent.getSource() == a_menuItemOpen)
         {
             open();
             songName(); //updates song name label
         }
-
     }
 
     //C Requirements
@@ -193,12 +187,8 @@ public class GUI extends JFrame implements ActionListener
     {
         player.openFile();
     }
-
-    //B Requirements 
-    public void volume(){}
     
     //***B Requirements***    
-    
     public void getVolume()
     {
         //double l_volume = player.getVolume();
@@ -226,19 +216,12 @@ public class GUI extends JFrame implements ActionListener
         player.setMute(a_guiMute); //boolean guiMute
     }
 
-
-    public void restart()
-    {
-
-    }
-
-
     public void songName()
     {
         try
         {
             String l_name = player.getCurrentTrackName(); //get name of track
-            a_songName.setText(l_name); //setName
+            a_songName.setText("Now Playing: " + l_name + "."); //setName
         }
         catch(Exception e)
         {
@@ -249,12 +232,17 @@ public class GUI extends JFrame implements ActionListener
     public void getTime()
     {
         //Double l_time = player.getTime();
-        //a_currentTime.setText(l_time);    
+        //a_currentTime.setText("(" + l_time + ")");    
     }
     
     //***C Requirements***
     public void setTime()
     {
         
+    }
+    
+    public void getPlaylist()
+    {
+    
     }
 }
