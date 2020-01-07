@@ -25,11 +25,10 @@ public class GUI extends JFrame implements ActionListener
     private JLabel a_rightB = new JLabel(")");
     private JLabel a_slash = new JLabel("/");
     
-    //slider
-    private JSlider a_timeSlider = new JSlider();
+ 
     
     //sliders
-    //private JSlider a_timeSlider = new JSlider(1, 100);
+    private JSlider a_timeSlider = new JSlider();
     private JSlider a_volumeSlider = new JSlider();
 
   
@@ -107,8 +106,6 @@ public class GUI extends JFrame implements ActionListener
 
 
         //need to call getMute and getVolume
-
-        
         //calls getMute and volume when starting
         if(getMute() == true){a_guiMute = true;System.out.println(getMute());}else{a_guiMute=false;} //check for the mute button icon
         getVolume(); //this is used to make sure that the volume is correct;
@@ -174,9 +171,7 @@ public class GUI extends JFrame implements ActionListener
 
     }
 
-
     //C Requirements
-   
     //***C Requirements***
     public void play()
     {
@@ -215,6 +210,7 @@ public class GUI extends JFrame implements ActionListener
     {
         //need to set the volume
         double l_volume = a_volumeSlider.getValue();
+        l_volume = l_volume / 100;
         player.setVolume(l_volume); //double guiVolume
     }  
         
@@ -224,9 +220,6 @@ public class GUI extends JFrame implements ActionListener
         return l_isMute;
     }
 
-
-    public void mute(){}
- 
     public void setMute()
     {
         //need to setMute

@@ -154,9 +154,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public double setVolume(double _volume){                        
-        songPlay = new Media(new File(pathFile).toURI().toString());        
-        a_mediaPlayer.setVolume(0.0);    
-        
+        //songPlay = new Media(new File(pathFile).toURI().toString());        
+        a_mediaPlayer.setVolume(_volume);    
         return _volume;
         
         //**setToZero needs if to set volume value
