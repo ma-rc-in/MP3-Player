@@ -80,7 +80,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public void play()
     {
         a_mediaPlayer.play();  
-        //getTime();
+        getTime();
     }
 
     public void pause()
@@ -144,7 +144,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         return _volume;
     }
 
-    //public void getTime(){
+    public Duration getTime(){
     //Duration duration = new Duration.toString();
 
     //File filestring = new File("file1.mp3");
@@ -153,8 +153,16 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     //MediaPlayer mediaPlayer = new MediaPlayer(file);
 
     //System.out.println("Duration: " + file.getDuration().toSeconds());
+    
+    Duration duration = a_mediaPlayer.getCurrentTime();
+    
+    System.out.println("Duration: " + duration.toSeconds());
 
-    //}
+    return duration;
+    
+
+    }
+    
     public boolean getMute(){
         boolean muted = a_mediaPlayer.isMute();  
         return muted;  
