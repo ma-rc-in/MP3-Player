@@ -260,8 +260,7 @@ public class GUI extends JFrame implements ActionListener
     
     public void getTime()
     {
-        //Double l_time = player.getTime();
-        //a_currentTime.setText("(" + l_time + ")");    
+        a_currentTime.setText("(" + player.getTime().toSeconds() + ")");    
     }
     
     //***C Requirements***
