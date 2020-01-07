@@ -31,10 +31,6 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private boolean _mute = false;
     private double _volume;
     private double getVolumeValue;
-
-    private double setToZero = 0;
-    private double setToOne;
-    
     Media songPlay;
 
     public void GUITester()
@@ -125,6 +121,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         a_mediaPlayer.setAutoPlay(true);     
         getCurrentTrackName();
         getVolume();
+        getTime();
+
 
         //  songPlay = _volume;
     }
@@ -157,12 +155,18 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         //songPlay = new Media(new File(pathFile).toURI().toString());        
         a_mediaPlayer.setVolume(_volume);    
         return _volume;
-        
-        //**setToZero needs if to set volume value
-
-
     }
-    //public Duration getTime(){}
+    
+    public Duration getTime(){
+        Duration duration = new Duration(1);
+        
+        //fileNameLabel.setText("Current song: " + duration.toSeconds());    
+        
+        return duration;
+    }
+    
+    
+    
     //public boolean getMute(){}
 
     //public Duration getTime(){}
