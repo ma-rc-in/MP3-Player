@@ -87,12 +87,11 @@ public class GUI extends JFrame implements ActionListener
         a_currentTime.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         //controls buttons
+        a_controlsPanel.add(a_previousSongButton);
         a_controlsPanel.add(a_playButton);
         a_controlsPanel.add(a_pauseButton);
         a_controlsPanel.add(a_stopButton);
-        a_controlsPanel.add(a_nextSongButton);
-        a_controlsPanel.add(a_previousSongButton);
-
+        a_controlsPanel.add(a_nextSongButton);  
         a_controlsPanel.add(a_muteButton);
         a_muteButton.setPreferredSize(new Dimension(50, 20)); //mute button
         a_muteButton.setFont(new Font("Arial", Font.PLAIN, 5)); //mute button
@@ -220,7 +219,7 @@ public class GUI extends JFrame implements ActionListener
     //***B Requirements***    
     public void getVolume()
     {
-        //double l_volume = player.getVolume();
+        //double l_volume = player.getVolume() * 100;
         //a_volumeSlider.setValue(l_volume);
         //return l_volume;
     }
@@ -260,13 +259,18 @@ public class GUI extends JFrame implements ActionListener
     
     public void getTime()
     {
-        a_currentTime.setText("(" + player.getTime().toSeconds() + ")");    
+        //a_currentTime.setText("(" + player.getTime().toSeconds() + ")");
+        
+        //double l_time = player.getTime(); //this might not translate so well
+        //a_timeSlider.setValue(l_volume);
+        
+        //set slider value
     }
     
     //***C Requirements***
     public void setTime()
     {
-        
+        //need to be called when moving the actual slider
     }
     
     public void playlistDisplay() //need to call the method from somewhere
@@ -296,8 +300,23 @@ public class GUI extends JFrame implements ActionListener
         */
     }
     
-    public void back()
+    public void back() //sends the playlist back a song, or 10 seconds
     {
+        /*
+        if(player.getTime() <= 10) //10 seconds rewind check
+        {
+            //player.setTime(0); //check to make sure (this is to me, Callum, i'm sure if this will function right?)
+        }
         
+       else if(a_playlistValue == 0) //checks to see if it needs to go to the end of the playlist
+       {
+           a_playlistValue = player.getPlaylist().size;
+       }
+       else //finally, just send it back one song
+       {
+           a_playlistValue--;
+           player.playTrack(a_playlistValue);
+       }
+       */
     }
 }
