@@ -49,8 +49,6 @@ public class GUI extends JFrame implements ActionListener
     
     public GUI()
     {
-        
-        
         //creation
         add(a_controlsPanel);
         add(a_informationPanel);
