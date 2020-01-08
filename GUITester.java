@@ -165,21 +165,9 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public boolean getMute(){
-        //isMuted = a_mediaPlayer.isMute(); //REMOVE THE COMMENTS LATER <<<<<<<<<<<<<<<<<<<THIS WAS FOR A TEST
-        //isMuted = a_mediaPlayer.isMute();   
-        //boolean muted = a_mediaPlayer.isMute();
-        boolean isMuted = saver.getMute(); //gets volume from saver
-        //return muted;
-
-        fileNameLabel.setText("22" + isMuted);
+        //isMuted = a_mediaPlayer.isMute(); 
+        boolean isMuted = saver.getMute(); //gets volume from saver       
         return isMuted;  
-
-        //fileNameLabel.setText("22" + isMuted);
-        //return isMuted;  
-        //boolean muted = a_mediaPlayer.isMute();
-        //boolean muted = saver.getMute(); //gets volume from saver
-        //return muted;  
-
     }
 
     public double getVolume(){
@@ -191,6 +179,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public void setTime(Duration _time){
 
     }
+
     public Duration getTotalTime(){
         Duration duration = a_mediaPlayer.getTotalDuration();
         return duration;

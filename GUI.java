@@ -194,7 +194,7 @@
         
         if (_actionevent.getSource() == a_nextSongButton)
         {
-            skip();
+            skip();            
         }
         
         if (_actionevent.getSource() == a_previousSongButton)
@@ -211,6 +211,7 @@
         //getCurrentTrackName(); //need to call from player
         player.play();
         player.getTotalTime();
+        getMute();
     }
 
     public void stop()
@@ -249,7 +250,7 @@
     public boolean getMute()
     {
         a_guiMute = player.getMute();
-        System.out.println(a_guiMute);
+        System.out.println(a_guiMute);   
         return a_guiMute;
     }
 
