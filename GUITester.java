@@ -21,7 +21,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private ControllerTest a_control = new ControllerTest();  
     private JPanel a_panel = new JPanel();
     private MediaPlayer a_mediaPlayer;
-    private Saver saver; //saver class
+    private Saver saver = new Saver(); //saver class
 
     JFileChooser chooseFile;
     JButton openFileButton = new JButton("Open File");
@@ -77,7 +77,17 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         if (_ae.getSource() == a_button5)setVolume(_volume);
 
     }
-
+    
+    public void saveSettings()
+    {
+        saver.saveSettings();
+    }
+    
+    public void loadSettings()
+    {
+        saver.loadSettings();
+    }
+    
     public void play()
     {
         a_mediaPlayer.play();  
@@ -111,7 +121,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
         pathFile = pathFile.replace("\\", "/"); 
         songPlay = new Media(new File(pathFile).toURI().toString());
-        a_mediaPlayer.stop();       
+        //a_mediaPlayer.stop();       
         a_mediaPlayer = new MediaPlayer(songPlay);
         a_mediaPlayer.setAutoPlay(true);     
         getCurrentTrackName();
@@ -168,13 +178,13 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
     
     public boolean getMute(){
-        boolean muted = a_mediaPlayer.isMute();
-        muted = saver.getMute(); //gets volume from saver
+        //boolean muted = a_mediaPlayer.isMute();
+        boolean muted = saver.getMute(); //gets volume from saver
         return muted;  
     }
 
     public double getVolume(){
-        getVolumeValue = a_mediaPlayer.getVolume();
+        //getVolumeValue = a_mediaPlayer.getVolume();
         getVolumeValue = saver.getVolume();
         return getVolumeValue;
     }
