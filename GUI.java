@@ -209,10 +209,9 @@
     //***C Requirements***
     public void play()
     {
-        //getCurrentTrackName(); //need to call from player
+        songName(); //gets song name
         player.play();
-        player.getTotalTime();
-        a_timeSlider.setValue(0);
+        a_timeSlider.setValue(0);//automatically sets the value to 0;
         getMute();
     }
 
