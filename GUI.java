@@ -195,7 +195,7 @@
         
         if (_actionevent.getSource() == a_nextSongButton)
         {
-            skip();
+            skip();            
         }
         
         if (_actionevent.getSource() == a_previousSongButton)
@@ -213,6 +213,7 @@
         player.play();
         player.getTotalTime();
         a_timeSlider.setValue(0);
+        getMute();
     }
 
     public void stop()
@@ -227,7 +228,18 @@
 
     public void open()
     {
-        player.openFile();
+        Object[] options = {"Load File", "Load Playlist", "Cancel"};
+        int selection = JOptionPane.showOptionDialog(this, "Which type would you like to open?","Open",
+        JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //default button title
+        
+        if (selection==0)
+        {
+            player.openFile();
+        }
+        if (selection==1)
+        {
+            //player.openPlaylist();
+        }
     }
     
     //***B Requirements***    
@@ -251,6 +263,7 @@
     public boolean getMute()
     {
         a_guiMute = player.getMute();
+        System.out.println(a_guiMute);   
         System.out.println(a_guiMute);
         return a_guiMute;
     }

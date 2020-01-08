@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="11.0.2" class="java.beans.XMLDecoder">
- <object class="Saver">
-  <void property="volume">
-   <double>0.17</double>
-  </void>
- </object>
+ <object class="Saver"/>
 </java>
