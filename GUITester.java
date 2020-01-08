@@ -73,7 +73,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         if (_ae.getSource() == a_button2)pause();
         if (_ae.getSource() == a_button3)stop();  
         if (_ae.getSource() == openFileButton)openFile();
-        if (_ae.getSource() == a_button4)restart();
+        if (_ae.getSource() == a_button4)setMute(mute);
         if (_ae.getSource() == a_button5)setVolume(_volume);
 
     }
@@ -91,7 +91,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public void play()
     {
         a_mediaPlayer.play();        
-        getTotalTime();        
+        getTotalTime();
+        getMute();
     }
 
     public void pause()
@@ -168,6 +169,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         //boolean muted = a_mediaPlayer.isMute();
         boolean isMuted = saver.getMute(); //gets volume from saver
         //return muted;
+        
+        fileNameLabel.setText("22" + isMuted);
         return isMuted;  
         //boolean muted = a_mediaPlayer.isMute();
         //boolean muted = saver.getMute(); //gets volume from saver
@@ -184,8 +187,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     //public void setTime(Duration _time){}
 
     public Duration getTotalTime(){
-        Duration duration = a_mediaPlayer.getTotalDuration(); 
-        fileNameLabel.setText("22" + duration);
+        Duration duration = a_mediaPlayer.getTotalDuration();         
         return duration;
     }
 
@@ -196,7 +198,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     //public void playTrack(int _trackNo){}
 
     public void restart(){
-    a_mediaPlayer.seek(a_mediaPlayer.getStartTime());    
+        a_mediaPlayer.seek(a_mediaPlayer.getStartTime());    
     } 
 
 }
