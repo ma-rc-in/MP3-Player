@@ -35,7 +35,6 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private boolean isMuted;
     Media songPlay;
 
-
     public void GUITester()
     {
         add(a_panel);
@@ -167,7 +166,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
     public boolean getMute(){
         boolean isMuted = saver.getMute(); //gets volume from saver
-        return isMuted;       
+        return isMuted; 
     }
 
     public double getVolume(){
@@ -177,6 +176,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public void setTime(Duration _time){
+
+        //_time = a_mediaPlayer.
 
     }
 
