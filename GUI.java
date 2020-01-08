@@ -251,6 +251,7 @@
     {
         a_guiMute = player.getMute();
         System.out.println(a_guiMute);   
+        System.out.println(a_guiMute);
         return a_guiMute;
     }
 
