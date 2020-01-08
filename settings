@@ -2,7 +2,11 @@
 <java version="11.0.2" class="java.beans.XMLDecoder">
  <object class="Saver">
   <void property="volume">
+<<<<<<< HEAD
    <double>0.11</double>
+=======
+   <double>0.09</double>
+>>>>>>> 823f942f8a9d366de20cf23ed1d2d5e2c180fb98
   </void>
  </object>
 </java>

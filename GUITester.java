@@ -165,9 +165,9 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public boolean getMute(){
-        //isMuted = a_mediaPlayer.isMute();         
+        //isMuted = a_mediaPlayer.isMute();
         boolean isMuted = saver.getMute(); //gets volume from saver
-        return isMuted;
+        return isMuted;       
     }
 
     public double getVolume(){
