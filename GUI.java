@@ -48,6 +48,8 @@ public class GUI extends JFrame implements ActionListener
 
     public GUI()
     {
+        player.loadSettings();
+        
         //layout of the information panel (Layout Manager)
         a_informationPanel.setLayout(new BoxLayout(a_informationPanel, BoxLayout.Y_AXIS));
         a_controlsPanel.setLayout(new BoxLayout(a_controlsPanel, BoxLayout.X_AXIS));
@@ -230,6 +232,7 @@ public class GUI extends JFrame implements ActionListener
         double l_volume = a_volumeSlider.getValue();
         l_volume = l_volume / 100;
         player.setVolume(l_volume); //double guiVolume
+        player.saveSettings();
     }  
         
     public boolean getMute()
@@ -242,6 +245,7 @@ public class GUI extends JFrame implements ActionListener
     {
         //need to setMute
         player.setMute(a_guiMute); //boolean guiMute
+        player.saveSettings();
     }
 
     public void songName()

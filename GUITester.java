@@ -21,6 +21,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private ControllerTest a_control = new ControllerTest();  
     private JPanel a_panel = new JPanel();
     private MediaPlayer a_mediaPlayer;
+    private Saver saver = new Saver(); //saver class
 
     JFileChooser chooseFile;
     JButton openFileButton = new JButton("Open File");
@@ -77,6 +78,16 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
     }
 
+    public void saveSettings()
+    {
+        saver.saveSettings();
+    }
+    
+    public void loadSettings()
+    {
+        saver.loadSettings();
+    }
+    
     public void play()
     {
         a_mediaPlayer.play();        
@@ -110,7 +121,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
         pathFile = pathFile.replace("\\", "/"); 
         songPlay = new Media(new File(pathFile).toURI().toString());
-        a_mediaPlayer.stop();       
+        //a_mediaPlayer.stop();       
         a_mediaPlayer = new MediaPlayer(songPlay);
         a_mediaPlayer.setAutoPlay(true);     
         getCurrentTrackName();
@@ -135,12 +146,15 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
             a_button4.setText("Mute");
             a_mediaPlayer.setMute(false);         
         }
+ 
         mute = ! mute;
+        saver.setMute(mute); //sets saver to mute value
     }
 
     public double setVolume(double _volume){                        
         //songPlay = new Media(new File(pathFile).toURI().toString());        
-        a_mediaPlayer.setVolume(_volume);    
+        a_mediaPlayer.setVolume(_volume);
+        saver.setVolume(_volume);
         return _volume;
     }
 
@@ -152,11 +166,17 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public boolean getMute(){
         isMuted = a_mediaPlayer.isMute();
         System.out.println(isMuted);
+
+        //boolean muted = a_mediaPlayer.isMute();
+        boolean isMuted = saver.getMute(); //gets volume from saver
+        //return muted;  
         return isMuted;  
+
     }
 
     public double getVolume(){
-        getVolumeValue = a_mediaPlayer.getVolume();
+        //getVolumeValue = a_mediaPlayer.getVolume();
+        getVolumeValue = saver.getVolume();
         return getVolumeValue;
     }
 
