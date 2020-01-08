@@ -82,12 +82,12 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     {
         saver.saveSettings();
     }
-    
+
     public void loadSettings()
     {
         saver.loadSettings();
     }
-    
+
     public void play()
     {
         a_mediaPlayer.play();        
@@ -146,7 +146,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
             a_button4.setText("Mute");
             a_mediaPlayer.setMute(false);         
         }
- 
+
         mute = ! mute;
         saver.setMute(mute); //sets saver to mute value
     }
@@ -165,13 +165,16 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
     public boolean getMute(){
         isMuted = a_mediaPlayer.isMute();
-        System.out.println(isMuted);
+        //System.out.println(isMuted);
 
         //boolean muted = a_mediaPlayer.isMute();
         boolean isMuted = saver.getMute(); //gets volume from saver
         //return muted;  
         return isMuted;  
 
+        //boolean muted = a_mediaPlayer.isMute();
+        //boolean muted = saver.getMute(); //gets volume from saver
+        //return muted;  
     }
 
     public double getVolume(){
