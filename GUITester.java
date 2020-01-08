@@ -31,8 +31,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private double _volume;
     private double getVolumeValue;
     private boolean mute;
+    private boolean isMuted;
     Media songPlay;
-    Duration songDuration;
 
     public void GUITester()
     {
@@ -79,8 +79,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
     public void play()
     {
-        a_mediaPlayer.play();  
-        getTime();
+        a_mediaPlayer.play();        
+        getMute();
     }
 
     public void pause()
@@ -145,27 +145,14 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public Duration getTime(){
-    //Duration duration = new Duration.toString();
-
-    //File filestring = new File("file1.mp3");
-    //Media file = new Media(filestring.toURI().toString());  
-
-    //MediaPlayer mediaPlayer = new MediaPlayer(file);
-
-    //System.out.println("Duration: " + file.getDuration().toSeconds());
-    
-    Duration duration = a_mediaPlayer.getCurrentTime();
-    
-    System.out.println("Duration: " + duration.toSeconds());
-
-    return duration;
-    
-
+        Duration duration = a_mediaPlayer.getCurrentTime(); 
+        return duration;
     }
-    
+
     public boolean getMute(){
-        boolean muted = a_mediaPlayer.isMute();  
-        return muted;  
+        isMuted = a_mediaPlayer.isMute();
+        System.out.println(isMuted);
+        return isMuted;  
     }
 
     public double getVolume(){
