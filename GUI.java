@@ -210,6 +210,7 @@
     {
         //getCurrentTrackName(); //need to call from player
         player.play();
+        player.getTotalTime();
     }
 
     public void stop()
@@ -272,19 +273,35 @@
         }
     }
     
-    public void getTime()
+    
+    public void getTime() //was double
     {
         a_currentTime.setText("(" + player.getTime().toSeconds() + ")"); //
-            
-        //double l_time = player.getTime(); //this might not translate so well
-        //a_timeSlider.setValue(player.getTime());
+         
+        /*
+        //set slider maximum value
+        double l_maxTime = player.getTotalTime();
+        int l_maxTimeInt = (int)Math.round(l_maxTime);
+        a_timeSlider.setMaxValue(l_maxTimeInt);
+        
+        //set slider current value
+        double l_time = player.getTime() * 100; //this might not translate so well
+        int l_timeInt = (int)Math.round(l_time);
+        a_timeSlider.setValue(l_timeInt);
+        return l_time;
+        */
         
         //set slider value
     }
     
+    
     //***C Requirements***
     public void setTime()
     {
+        //double l_time = a_volumeSlider.getValue();
+        //l_time = time / 100;
+        //player.setTime(l_time); //double guiVolume
+        
         //need to be called when moving the actual slider
     }
     
