@@ -87,6 +87,7 @@
                 a_informationPanel.add(a_timeSlider);
                 a_timeSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
                 a_timeSlider.setPreferredSize(new Dimension(325, 20));
+                a_timeSlider.setValue(0);
                 a_informationPanel.add(a_currentTime); //current time label (default 0:00)
                 a_currentTime.setAlignmentX(Component.CENTER_ALIGNMENT);
                 
@@ -211,6 +212,7 @@
         //getCurrentTrackName(); //need to call from player
         player.play();
         player.getTotalTime();
+        a_timeSlider.setValue(0);
     }
 
     public void stop()
@@ -277,38 +279,41 @@
     public void getTime() //was double
     {
         a_currentTime.setText("(" + player.getTime().toSeconds() + ")"); //
-         
-        /*
+        
+        //minumum value
+        a_timeSlider.setMinimum(0);
+        
         //set slider maximum value
-        double l_maxTime = player.getTotalTime();
+        double l_maxTime = player.getTotalTime().toSeconds();
         int l_maxTimeInt = (int)Math.round(l_maxTime);
-        a_timeSlider.setMaxValue(l_maxTimeInt);
+        a_timeSlider.setMaximum(l_maxTimeInt);
         
         //set slider current value
-        double l_time = player.getTime() * 100; //this might not translate so well
+        double l_time = player.getTime().toSeconds(); //this might not translate so well
         int l_timeInt = (int)Math.round(l_time);
         a_timeSlider.setValue(l_timeInt);
-        return l_time;
-        */
-        
-        //set slider value
     }
     
     
     //***C Requirements***
     public void setTime()
     {
-        //double l_time = a_volumeSlider.getValue();
-        //l_time = time / 100;
-        //player.setTime(l_time); //double guiVolume
+        /*
+        player.setTime().of(a_volumeSlider.getValue(), SECONDS);
         
+        double l_time = a_volumeSlider.getValue();
+        
+        
+        
+        player.setTime(l_time); //double guiVolume
+        */
         //need to be called when moving the actual slider
     }
     
     public void playlistDisplay() //need to call the method from somewhere
     {
         /*
-        for(int l_sizeNumber = 0; l_sizeNumber < player.getPlaylist().size; l_sizeNumber++)
+        for(int l_sizeNumber = 0; l_sizeNumber < player.getPlaylist().size; l_sizeNumber++) 
         {
             a_playlist.addElement(l_sizeNumber + ") " + player.getPlaylist());
         }
