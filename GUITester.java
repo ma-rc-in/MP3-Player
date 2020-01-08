@@ -59,7 +59,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
         initialiseFiles();
     }    
-
+     
     public void initialiseFiles(){
         JFXPanel fxPanel = new JFXPanel();
         String bip = "file1.mp3";  
@@ -146,7 +146,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
             a_button4.setText("Mute");
             a_mediaPlayer.setMute(false);         
         }
-
+       
         mute = ! mute;
         saver.setMute(mute); //sets saver to mute value
     }
@@ -159,17 +159,17 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public Duration getTime(){
-        Duration duration = a_mediaPlayer.getCurrentTime(); 
+        Duration duration = a_mediaPlayer.getCurrentTime();
         return duration;
     }
 
     public boolean getMute(){
-        isMuted = a_mediaPlayer.isMute();
+        //isMuted = a_mediaPlayer.isMute(); //REMOVE THE COMMENTS LATER <<<<<<<<<<<<<<<<<<<THIS WAS FOR A TEST
 
         //boolean muted = a_mediaPlayer.isMute();
         boolean isMuted = saver.getMute(); //gets volume from saver
         //return muted;
-        return isMuted;  
+        return isMuted;
         //boolean muted = a_mediaPlayer.isMute();
         //boolean muted = saver.getMute(); //gets volume from saver
         //return muted;  

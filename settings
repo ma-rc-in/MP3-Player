@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="11.0.2" class="java.beans.XMLDecoder">
  <object class="Saver">
-  <void property="mute">
-   <boolean>true</boolean>
-  </void>
   <void property="volume">
-   <double>0.03</double>
+   <double>0.09</double>
   </void>
  </object>
 </java>
