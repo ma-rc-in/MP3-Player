@@ -32,7 +32,6 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private double _volume;
     private double getVolumeValue;
     private boolean mute;
-    private boolean isMuted;
     Media songPlay;
 
     public void GUITester()
