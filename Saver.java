@@ -2,12 +2,13 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
+import java.util.*;
 
 public class Saver //implements danSaver
 {
     private double  a_volume;
     private boolean a_mute;
-    
+
     ////***B Requirements***
     
     public boolean getMute()
@@ -70,7 +71,31 @@ public class Saver //implements danSaver
     }
       
     //***C Requirements***
-    //public void savePlayList(ArrayList<String> _filepaths, String _filepath){}
-    //public ArrayList<String> loadPlayList(String _filepath){}    
-    //public ArrayList<String> getHardCodedPlayList(){}
+    
+    public ArrayList<String> getHardCodedPlayList()
+    {
+        ArrayList<String> l_hardCodedPlayList = new ArrayList();
+        
+        //adding files to the arraylist
+        l_hardCodedPlayList.add("\"File1.mp3\""); 
+        l_hardCodedPlayList.add("File2.mp3");
+        l_hardCodedPlayList.add("file1.mp3");
+        l_hardCodedPlayList.add("\"file1.mp3\""); 
+        //l_hardCodedPlayList.add("songs/file3.mp3");
+        
+        return l_hardCodedPlayList;
+    }
+    
+    public void savePlayList(ArrayList<String> _filepaths, String _filepath)
+    {
+        //saves the lpaylist in a file
+        _filepaths.add(_filepath);
+    }
+    
+    /*
+    public ArrayList<String> loadPlayList(String _filepath){
+        return _filepaths;
+    }
+    */
+   
 }

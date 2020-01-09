@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="11.0.2" class="java.beans.XMLDecoder">
-<<<<<<< HEAD
- <object class="Saver"/>
-=======
  <object class="Saver">
   <void property="mute">
    <boolean>true</boolean>
   </void>
  </object>
->>>>>>> 6886d5ed321e091ad82878d848e1c4764ce14a5b
 </java>
