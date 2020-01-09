@@ -77,12 +77,13 @@ public class Saver //implements danSaver
         ArrayList<String> l_hardCodedPlayList = new ArrayList();
         
         //adding files to the arraylist
-        l_hardCodedPlayList.add("\"File1.mp3\""); 
-        l_hardCodedPlayList.add("File2.mp3");
-        l_hardCodedPlayList.add("file1.mp3");
-        l_hardCodedPlayList.add("\"file1.mp3\""); 
-        //l_hardCodedPlayList.add("songs/file3.mp3");
+        //l_hardCodedPlayList.add("C://Users//cal24//Documents//University//Object Oriented Programming//Assignment 1//Assignment 1//Assignment 1//Callum Marcin Part A-copy//file1.mp3"); 
+        //l_hardCodedPlayList.add("C://Users//cal24//Documents//University//Object Oriented Programming//Assignment 1//Assignment 1//Assignment 1//Callum Marcin Part A-copy//file2.mp3");
         
+        //so files can be played here, regardless of the directory
+        l_hardCodedPlayList.add(System.getProperty("user.dir") + "//file1.mp3");
+        l_hardCodedPlayList.add(System.getProperty("user.dir") + "//file2.mp3");
+
         return l_hardCodedPlayList;
     }
     
