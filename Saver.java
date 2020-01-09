@@ -2,12 +2,13 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
+import java.util.*;
 
 public class Saver //implements danSaver
 {
     private double  a_volume;
     private boolean a_mute;
-    
+
     ////***B Requirements***
     
     public boolean getMute()
@@ -70,7 +71,32 @@ public class Saver //implements danSaver
     }
       
     //***C Requirements***
-    //public void savePlayList(ArrayList<String> _filepaths, String _filepath){}
-    //public ArrayList<String> loadPlayList(String _filepath){}    
-    //public ArrayList<String> getHardCodedPlayList(){}
+    
+    public ArrayList<String> getHardCodedPlayList()
+    {
+        ArrayList<String> l_hardCodedPlayList = new ArrayList();
+        
+        //adding files to the arraylist
+        //l_hardCodedPlayList.add("C://Users//cal24//Documents//University//Object Oriented Programming//Assignment 1//Assignment 1//Assignment 1//Callum Marcin Part A-copy//file1.mp3"); 
+        //l_hardCodedPlayList.add("C://Users//cal24//Documents//University//Object Oriented Programming//Assignment 1//Assignment 1//Assignment 1//Callum Marcin Part A-copy//file2.mp3");
+        
+        //so files can be played here, regardless of the directory
+        l_hardCodedPlayList.add(System.getProperty("user.dir") + "//file1.mp3");
+        l_hardCodedPlayList.add(System.getProperty("user.dir") + "//file2.mp3");
+
+        return l_hardCodedPlayList;
+    }
+    
+    public void savePlayList(ArrayList<String> _filepaths, String _filepath)
+    {
+        //saves the lpaylist in a file
+        _filepaths.add(_filepath);
+    }
+    
+    /*
+    public ArrayList<String> loadPlayList(String _filepath){
+        return _filepaths;
+    }
+    */
+   
 }
