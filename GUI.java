@@ -10,8 +10,7 @@
         {
             //need to impletement try catch and make sure that everything is protected
             private JFrame a_frame = new JFrame("Music Player"); //JFrame
-            //private static String[] test = {"Test1", "Test2", "Test3"}; //delete later
-        
+            
             //control panel attributes
             private JButton a_playButton = new JButton("Play");
             private JButton a_pauseButton = new JButton("Pause");
@@ -23,7 +22,8 @@
             //information panel attrbriutes
             private JLabel a_songName = new JLabel("No Current Song");
             private JLabel a_currentTime = new JLabel("(0:00)");
-            private JList a_playlist = new JList();
+            DefaultListModel<String> model = new DefaultListModel<>(); //May need to delete
+            private JList<String> a_playlist = new JList<>(model); //may need to delete
             private JScrollPane a_playlistSP = new JScrollPane(a_playlist);
         
             //sliders
@@ -51,6 +51,7 @@
             public GUI()
             {
                 player.loadSettings();
+                player.GUITester();
         
                 //layout of the information panel (Layout Manager)
                 a_informationPanel.setLayout(new BoxLayout(a_informationPanel, BoxLayout.Y_AXIS));
@@ -77,6 +78,7 @@
                     new ListSelectionListener(){
                         public void valueChanged(ListSelectionEvent event){
                             a_playlistValue = a_playlist.getSelectedIndex();
+                            stop(); //used to make sure there are no overlapping sounds
                             playlistPlay(a_playlistValue);
                         }
                     }
@@ -129,6 +131,7 @@
                 //if(getMute() == true){a_guiMute = true;}else{a_guiMute=false;} //check for the mute button icon
                 getMute();
                 getVolume(); //this is used to make sure that the volume is correct;
+                playlistDisplay(); //used to load the hardCodedPlaylist
         
                 //used to get the volumesliders poistion
                 a_volumeSlider.addChangeListener(new ChangeListener(){
@@ -241,7 +244,7 @@
             }
             if (selection==1)
             {
-                //player.openPlaylist();
+                player.openPlayList();
                 playlistDisplay();
                 //playlistPlay(int a_playlistValue);
             }
@@ -268,8 +271,6 @@
         public boolean getMute()
         {
             a_guiMute = player.getMute();
-            System.out.println(a_guiMute);   
-            System.out.println(a_guiMute);
             return a_guiMute;
         }
     
@@ -336,17 +337,18 @@
     
         public void playlistDisplay() //need to call the method from somewhere
         {
-            /*
-            for(int l_sizeNumber = 0; l_sizeNumber < player.getPlaylist().size; l_sizeNumber++) 
+            model.removeAllElements();//ensures that the playlist 'screen' is clear before loading
+            
+            for(int l_sizeNumber = 0; l_sizeNumber < player.getPlayList().size(); l_sizeNumber++) 
             {
-            a_playlist.addElement(l_sizeNumber + ") " + player.getPlaylist()); //adds the elements to the playlist with a number before
+               String l_name = player.getPlayList().get(l_sizeNumber); //gets the name
+               model.addElement(String.valueOf(l_sizeNumber + 1) + ") " + l_name + "."); //adds the elements to the playlist with a number before
             }
-             */
         }
     
         public void playlistPlay(int a_playlistValue) //need to pass value
         {
-            //player.playTrack(a_playlistValue);
+            player.playTrack(a_playlistValue);
             
             //autoplay
             if (player.getTime().toSeconds() == player.getTotalTime().toSeconds()) //if the current time is equal to total time
@@ -356,36 +358,34 @@
         }
     
         public void skip()
-        {
-            /*
+        {    
+            stop();
             a_playlistValue++;
-            if(a_playlistValue > player.getPlaylist().size) //repeats if it gets to the last song
+            if(a_playlistValue > player.getPlayList().size() - 1) //repeats if it gets to the last song
             {
-            a_playlistValue = 0;
+                a_playlistValue = 0;
             }
             player.playTrack(a_playlistValue);
-            songName();
-             */
+            songName();      
         }
     
         public void back() //sends the playlist back a song, or 10 seconds
         {
-            /*
+            stop();
             if(player.getTime().toSeconds() <= 10) //10 seconds rewind check
             {
-            //player.setTime.toSeconds(0); //check to make sure (this is to me, Callum, i'm sure if this will function right?)
+                //player.setTime(0).toSeconds(); //check to make sure (this is to me, Callum, i'm sure if this will function right?)
             }
     
             else if(a_playlistValue == 0) //checks to see if it needs to go to the end of the playlist
             {
-            a_playlistValue = player.getPlaylist().size;
+                a_playlistValue = player.getPlayList().size();
             }
             else //finally, just send it back one song
             {
-            a_playlistValue--;
-            player.playTrack(a_playlistValue);
-            songName();
+                a_playlistValue--;
+                player.playTrack(a_playlistValue);
+                songName();
             }
-             */
         }
 }

@@ -19,6 +19,7 @@ public class playerTest extends JFrame implements ActionListener
     private JPanel a_panel = new JPanel();
     private JButton openFileButton = new JButton("Open File");
     private JButton save = new JButton("Save");
+    private JButton loadpl = new JButton("Load Playlist");
     private ControllerTest a_control = new ControllerTest();  
 
     JFileChooser chooseFile;  
@@ -40,7 +41,9 @@ public class playerTest extends JFrame implements ActionListener
         add(a_panel);
         a_panel.add(openFileButton);
         a_panel.add(save);
+        a_panel.add(loadpl);
         openFileButton.addActionListener(this);
+        loadpl.addActionListener(this);
         save.addActionListener(this);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +64,7 @@ public class playerTest extends JFrame implements ActionListener
     { 
         if (_ae.getSource() == openFileButton)openFile();
         if (_ae.getSource() == save)savePlaylistFile();
+        if (_ae.getSource() == loadpl)loadPlaylist();
     }
     
     public void getHardCodedPlayList()
@@ -87,11 +91,23 @@ public class playerTest extends JFrame implements ActionListener
         }
     }
     
+    public void loadPlaylist()
+    {
+        JFileChooser chooseFile = new JFileChooser();
+        chooseFile.setCurrentDirectory(new File((System.getProperty("user.dir")))); //sets to automatically set at user directory
+        if (chooseFile.showSaveDialog(loadpl) == JFileChooser.APPROVE_OPTION) 
+        {
+            File file = chooseFile.getSelectedFile();
+            pathFile = chooseFile.getSelectedFile().getPath();
+            saver.loadPlayList(pathFile); //uses the pathFile to load the playlist
+        }
+    }
+    
     public void savePlaylist(String fileSave)
     {
         saver.savePlayList(test, fileSave);
     }
-    
+     
     public void playPlaylist(int l_number)
     {        
         chooseFile = new JFileChooser();

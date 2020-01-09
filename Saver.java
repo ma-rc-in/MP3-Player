@@ -1,8 +1,6 @@
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
-
 import java.io.ObjectInputStream;
-
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.util.*;
@@ -42,7 +40,6 @@ public class Saver implements danSaver
        {
            FileOutputStream t_outputStream = new FileOutputStream("settings"); //saves to file settings, or creates it if it can't
            XMLEncoder t_encoder = new XMLEncoder(t_outputStream);
-           //t_encoder.writeObject(this);
            t_encoder.writeObject(getMute()); //this has been changed from this to the methods
            t_encoder.writeObject(getVolume());
            t_encoder.close();

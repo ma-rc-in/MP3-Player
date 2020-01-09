@@ -32,11 +32,11 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private double _volume;
     private double getVolumeValue;
     private boolean mute;
-    private boolean isMuted;
     Media songPlay;
 
     public void GUITester()
     {
+        /*
         add(a_panel);
         a_panel.add(a_button);
         a_panel.add(a_button2);
@@ -55,8 +55,28 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,300);
         setLocationRelativeTo(null);
-        setVisible(true);       
-
+        setVisible(true);
+        */
+        
+        //This can be removed later if we implement custom playlists
+        saver.getHardCodedPlayList();
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int choice = JOptionPane.showConfirmDialog(this, "Would you like to save this playlist?",
+         "Notice", dialogButton); //notice
+         
+        if(choice == 0) //saves the file, or does nothing
+        {
+            JFileChooser chooseFile = new JFileChooser();
+            chooseFile.setCurrentDirectory(new File((System.getProperty("user.dir")))); //sets to automatically set at user directory
+            if (chooseFile.showSaveDialog(chooseFile) == JFileChooser.APPROVE_OPTION) 
+            {
+                File file = chooseFile.getSelectedFile();
+                pathFile = chooseFile.getSelectedFile().getPath();
+                saver.savePlayList(saver.getHardCodedPlayList(), pathFile); //uses the pathFile to save the playlist
+            }
+        }
+   
+        getVolume();
         initialiseFiles();
     }    
 
@@ -186,11 +206,47 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         return duration;
     }
 
-    //public void openPlayList(){}
+    public void openPlayList() //NEW -  NEED TO CHECK - Marcin, if you could check this to make sure it works as intended
+    {
+        JFileChooser chooseFile = new JFileChooser();
+        chooseFile.setCurrentDirectory(new File((System.getProperty("user.dir")))); //sets to automatically set at user directory
+        if (chooseFile.showSaveDialog(chooseFile) == JFileChooser.APPROVE_OPTION) 
+        {
+            File file = chooseFile.getSelectedFile();
+            pathFile = chooseFile.getSelectedFile().getPath();
+            saver.loadPlayList(pathFile); //uses the pathFile to load the playlist
+        }
+    }
 
-    //public ArrayList<String> getPlayList(){}
+    public ArrayList<String> getPlayList() //NEW - This will need to be changed once the custom playlist is added 
+    {
+        ArrayList<String> l_playlistNames = new ArrayList();
+        
+        for(int l_sizeNumber = 0; l_sizeNumber < saver.getHardCodedPlayList().size(); l_sizeNumber++)
+        {
+            String l_song = saver.getHardCodedPlayList().get(l_sizeNumber);
+            l_song = l_song.replace(".mp3", ""); //removes .mp3 from the name
+            String name = l_song.substring(l_song.lastIndexOf("/") + 1); //removes the file extension
+            
+            l_playlistNames.add(name);
+        }
+        return l_playlistNames;
+    }
 
-    //public void playTrack(int _trackNo){}
+    public void playTrack(int _trackNo) //NEW - This will need to be changed once the custom playlist is added 
+    {
+        chooseFile = new JFileChooser();
+        String l_song = saver.getHardCodedPlayList().get(_trackNo); //plays based on the index of the song chosen
+        
+        JFXPanel fxPanel = new JFXPanel();
+        String bip = l_song; //used to get the song path from name
+        String bipNew = bip.replace("\\", "/"); 
+        String name = bipNew.substring(bipNew.lastIndexOf("/") + 1); //this is used to get the name of the file
+        
+        Media hit = new Media(new File(bipNew).toURI().toString());
+        a_mediaPlayer = new MediaPlayer(hit);
+        a_mediaPlayer.setAutoPlay(true);
+    }
 
     public void restart(){
         a_mediaPlayer.seek(a_mediaPlayer.getStartTime());    
