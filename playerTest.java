@@ -18,11 +18,16 @@ public class playerTest extends JFrame implements ActionListener
     private Saver saver = new Saver();
     private JPanel a_panel = new JPanel();
     private JButton openFileButton = new JButton("Open File");
+    private JButton save = new JButton("Save");
     private ControllerTest a_control = new ControllerTest();  
 
     JFileChooser chooseFile;  
     public String fileName;
     public String pathFile;
+    
+    private String bipNew;
+    private ArrayList<String> test = new ArrayList();
+    
     File myFile = null;
     private double _volume;
     private double getVolumeValue;
@@ -34,7 +39,9 @@ public class playerTest extends JFrame implements ActionListener
     {
         add(a_panel);
         a_panel.add(openFileButton);
+        a_panel.add(save);
         openFileButton.addActionListener(this);
+        save.addActionListener(this);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,300);
@@ -42,15 +49,18 @@ public class playerTest extends JFrame implements ActionListener
         setVisible(true);   
         
         //media player
+        /*
         JFXPanel fxPanel = new JFXPanel();
         String bip = "File1.mp3";
         Media hit = new Media(new File(bip).toURI().toString());
         a_mediaPlayer = new MediaPlayer(hit);
+        */
     }
     
     public void actionPerformed(ActionEvent _ae)
     { 
         if (_ae.getSource() == openFileButton)openFile();
+        if (_ae.getSource() == save)savePlaylistFile();
     }
     
     public void getHardCodedPlayList()
@@ -59,24 +69,51 @@ public class playerTest extends JFrame implements ActionListener
         System.out.println(saver.getHardCodedPlayList());
     }
     
+    public void savePlaylistFile() //this can be used to save the playList
+    {
+        //for testing purposes
+        test.add("Test");
+        test.add("Test2");
+        test.add("Test3");
+        System.out.println(test);
+        
+        JFileChooser chooseFile = new JFileChooser();
+        chooseFile.setCurrentDirectory(new File((System.getProperty("user.dir")))); //sets to automatically set at user directory
+        if (chooseFile.showSaveDialog(save) == JFileChooser.APPROVE_OPTION) 
+        {
+            File file = chooseFile.getSelectedFile();
+            pathFile = chooseFile.getSelectedFile().getPath();
+            savePlaylist(pathFile); //uses the pathFile to save the playlist
+        }
+    }
+    
+    public void savePlaylist(String fileSave)
+    {
+        saver.savePlayList(test, fileSave);
+    }
+    
     public void playPlaylist(int l_number)
     {        
         chooseFile = new JFileChooser();
-        String l_song = saver.getHardCodedPlayList().get(l_number);
-        System.out.println(saver.getHardCodedPlayList().get(l_number));
+        String l_song = saver.getHardCodedPlayList().get(l_number); //plays based on the index of the song chosen
+        System.out.println(saver.getHardCodedPlayList().get(l_number)); //can delete later
         
         JFXPanel fxPanel = new JFXPanel();
         String bip = l_song; //used to get the song path from name
-        bip = bip.replace("\\", "/");
+        bipNew = bip.replace("\\", "/");
         
-        String name = bip.substring(bip.lastIndexOf("/") + 1); //this is used to get the name of the file
+        String name = bipNew.substring(bipNew.lastIndexOf("/") + 1); //this is used to get the name of the file
         System.out.println(name);
         
-        
-        Media hit = new Media(new File(bip).toURI().toString());
+        Media hit = new Media(new File(bipNew).toURI().toString());
         a_mediaPlayer = new MediaPlayer(hit);
         a_mediaPlayer.setAutoPlay(true);
+        
+        //this is just to test
+        //savePlaylist();
     }
+    
+    //these are just copied from the GUITester (player)
     
     public void openFile()
     {

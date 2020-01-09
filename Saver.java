@@ -1,13 +1,18 @@
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+
+import java.io.ObjectInputStream;
+
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.util.*;
 
-public class Saver //implements danSaver
+public class Saver implements danSaver
 {
     private double  a_volume;
     private boolean a_mute;
+    
+    ArrayList<String> a_playListLoad = new ArrayList();
 
     ////***B Requirements***
     
@@ -37,7 +42,9 @@ public class Saver //implements danSaver
        {
            FileOutputStream t_outputStream = new FileOutputStream("settings"); //saves to file settings, or creates it if it can't
            XMLEncoder t_encoder = new XMLEncoder(t_outputStream);
-           t_encoder.writeObject(this);
+           //t_encoder.writeObject(this);
+           t_encoder.writeObject(getMute()); //this has been changed from this to the methods
+           t_encoder.writeObject(getVolume());
            t_encoder.close();
            t_outputStream.close();
        } 
@@ -70,8 +77,7 @@ public class Saver //implements danSaver
         }  
     }
       
-    //***C Requirements***
-    
+    //***C Requirements***   
     public ArrayList<String> getHardCodedPlayList()
     {
         ArrayList<String> l_hardCodedPlayList = new ArrayList();
@@ -89,14 +95,40 @@ public class Saver //implements danSaver
     
     public void savePlayList(ArrayList<String> _filepaths, String _filepath)
     {
-        //saves the lpaylist in a file
-        _filepaths.add(_filepath);
+       try 
+       {
+           //this may be the filepath to the arraylist?
+          //_filepaths.add(_filepath);//adds _filepath to the playlist -delete
+          
+          FileOutputStream t_outputStream = new FileOutputStream(_filepath); //saves to file settings, or creates it if it can't
+          XMLEncoder t_encoder = new XMLEncoder(t_outputStream);
+          t_encoder.writeObject(_filepaths);//might need to change
+          t_encoder.close();
+          t_outputStream.close();
+       } 
+       
+       catch (Exception _ex) 
+       {
+          System.out.println(_ex.getMessage());
+       }
     }
     
-    /*
-    public ArrayList<String> loadPlayList(String _filepath){
-        return _filepaths;
+    public ArrayList<String> loadPlayList(String _filepath)
+    {
+        try
+        {
+            FileInputStream t_input = new FileInputStream(_filepath); //load from file "settings, was "settings" _filepath
+            XMLDecoder t_decode = new XMLDecoder(t_input);
+            a_playListLoad = (ArrayList) t_decode.readObject();
+
+            t_decode.close();
+            t_input.close(); 
+        }
+        catch (Exception _ex) 
+        {
+            System.out.println(_ex.getMessage());
+        }  
+        
+       return a_playListLoad; //returns the playlist name
     }
-    */
-   
 }
