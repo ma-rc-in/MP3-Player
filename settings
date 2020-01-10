@@ -6,5 +6,8 @@
 =======
  <boolean>true</boolean>
  <double>0.61</double>
+<<<<<<< HEAD
+>>>>>>> dd0143df0d49724168ece8b4622c032eda44b350
+=======
 >>>>>>> dd0143df0d49724168ece8b4622c032eda44b350
 </java>
