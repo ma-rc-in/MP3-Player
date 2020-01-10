@@ -3,8 +3,6 @@
         import java.awt.event.*;
         import javax.swing.event.*;
         import javafx.util.Duration;
-        //import javax.swing.event.ChangeEvent;
-        //import javax.swing.event.ChangeListener;
         
         public class GUI extends JFrame implements ActionListener
         {
@@ -55,7 +53,8 @@
         
                 //layout of the information panel (Layout Manager)
                 a_informationPanel.setLayout(new BoxLayout(a_informationPanel, BoxLayout.Y_AXIS));
-                a_controlsPanel.setLayout(new BoxLayout(a_controlsPanel, BoxLayout.X_AXIS));
+                //a_controlsPanel.setLayout(new BoxLayout(a_controlsPanel, BoxLayout.X_AXIS));
+                //a_controlsPanel.add(Box.createRigidArea(new Dimension(25,25)));
         
                 //creation
                 add(a_controlsPanel);
@@ -116,13 +115,14 @@
                 a_menuItemQuit.addActionListener(this);
         
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
                 //frame layout
                 a_frame.getContentPane().add(BorderLayout.PAGE_START, a_menuBar); // was north
                 a_frame.getContentPane().add(BorderLayout.CENTER, a_informationPanel); //was center
                 a_frame.getContentPane().add(BorderLayout.PAGE_END, a_controlsPanel); //was south
         
                 //a frame layout
-                a_frame.setSize(600,250); //400 150
+                a_frame.setSize(600,250); //Size of the frame, adjusted for all buttons
                 a_frame.setLocationRelativeTo(null);
                 a_frame.setVisible(true);
                 a_frame.setResizable(false);
@@ -381,6 +381,7 @@
             {
                 a_playlistValue = player.getPlayList().size();
             }
+            
             else //finally, just send it back one song
             {
                 a_playlistValue--;

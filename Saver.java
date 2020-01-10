@@ -14,27 +14,27 @@ public class Saver implements danSaver
 
     ////***B Requirements***
     
-    public boolean getMute()
+    public boolean getMute() //Callum
     {
         return a_mute;
     }
     
-    public void setMute(boolean _mute)
+    public void setMute(boolean _mute) //Callum
     {
         a_mute = _mute;
     }
     
-    public double getVolume()
+    public double getVolume() //Marcin
     {
         return a_volume;
     }
     
-    public void setVolume(double _volume)
+    public void setVolume(double _volume) //Marcin
     {
         a_volume = _volume;
     }
     
-    public void saveSettings()
+    public void saveSettings() //Callum
     {
        try 
        {
@@ -52,7 +52,7 @@ public class Saver implements danSaver
        }     
     }
     
-    public void loadSettings()
+    public void loadSettings() //Marcin
     {
         try
         {
@@ -75,7 +75,7 @@ public class Saver implements danSaver
     }
       
     //***C Requirements***   
-    public ArrayList<String> getHardCodedPlayList()
+    public ArrayList<String> getHardCodedPlayList() //Marcin
     {
         ArrayList<String> l_hardCodedPlayList = new ArrayList();
         
@@ -90,7 +90,7 @@ public class Saver implements danSaver
         return l_hardCodedPlayList;
     }
     
-    public void savePlayList(ArrayList<String> _filepaths, String _filepath)
+    public void savePlayList(ArrayList<String> _filepaths, String _filepath) //Callum
     {
        try 
        {
@@ -110,7 +110,7 @@ public class Saver implements danSaver
        }
     }
     
-    public ArrayList<String> loadPlayList(String _filepath)
+    public ArrayList<String> loadPlayList(String _filepath) //Callum
     {
         try
         {
