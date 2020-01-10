@@ -18,7 +18,6 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private JButton a_button3 = new JButton("Stop");
     private JButton a_button4 = new JButton("Mute");
     private JButton a_button5 = new JButton("Set0");
-    private ControllerTest a_control = new ControllerTest();  
     private JPanel a_panel = new JPanel();
     private MediaPlayer a_mediaPlayer;
     private Saver saver = new Saver(); //saver class

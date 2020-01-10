@@ -1,3 +1,4 @@
+
 //this is just to test the savers playlist functionality, delete this later
 import java.awt.*;
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class playerTest extends JFrame implements ActionListener
     private JButton openFileButton = new JButton("Open File");
     private JButton save = new JButton("Save");
     private JButton loadpl = new JButton("Load Playlist");
-    private ControllerTest a_control = new ControllerTest();  
+    //private ControllerTest a_control = new ControllerTest();  
 
     JFileChooser chooseFile;  
     public String fileName;
@@ -164,3 +165,4 @@ public class playerTest extends JFrame implements ActionListener
     }
 
 }
+
