@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="11.0.2" class="java.beans.XMLDecoder">
-<<<<<<< HEAD
  <boolean>false</boolean>
  <double>1.0</double>
-=======
- <boolean>true</boolean>
- <double>0.61</double>
-<<<<<<< HEAD
->>>>>>> dd0143df0d49724168ece8b4622c032eda44b350
-=======
->>>>>>> dd0143df0d49724168ece8b4622c032eda44b350
 </java>
