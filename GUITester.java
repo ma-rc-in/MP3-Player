@@ -192,6 +192,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     public boolean getMute(){
         boolean isMuted = saver.getMute(); //gets volume from saver
         return isMuted; 
+        //return mute;
     }
 
     public double getVolume(){
@@ -201,7 +202,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public void setTime(Duration _time){
-        //a_mediaPlayer.seek(_time.INDEFINITE);
+        a_mediaPlayer.seek(_time.UNKNOWN);
         //Duration duration = new Duration(ONE);
         //a_mediaPlayer.seek(_time);
         //Slider progBar;
@@ -209,7 +210,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         //GUI gui = new GUI(); 
         //a_mediaPlayer.seek(_time.seconds((time.getValue() / 100)* a_mediaPlayer.getTotalDuration().toSeconds()));
         
-       //a_mediaPlayer.seek(Duration.seconds());
+       
     }
     
     public Duration getTotalTime(){
