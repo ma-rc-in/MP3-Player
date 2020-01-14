@@ -19,7 +19,7 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private JButton a_button4 = new JButton("Mute");
     private JButton a_button5 = new JButton("Set0");
     private JPanel a_panel = new JPanel();
-    private MediaPlayer a_mediaPlayer;
+    public MediaPlayer a_mediaPlayer;
     private Saver saver = new Saver(); //saver class
 
     JFileChooser chooseFile;
@@ -33,33 +33,31 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private boolean mute;
     Media songPlay;
 
-    private Duration dur;
-
-    private JSlider a_timeSlider = new JSlider();
+    private Duration dur;    
 
     public void GUITester()
     {
-        /*
-        add(a_panel);
-        a_panel.add(a_button);
-        a_panel.add(a_button2);
-        a_panel.add(a_button3);     
-        a_panel.add(openFileButton);
-        a_panel.add(fileNameLabel);
-        a_panel.add(a_button4);   
-        a_panel.add(a_button5); 
-        a_button.addActionListener(this);
-        a_button2.addActionListener(this);
-        a_button3.addActionListener(this);
-        openFileButton.addActionListener(this);
-        a_button4.addActionListener(this);
-        a_button5.addActionListener(this);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600,300);
-        setLocationRelativeTo(null);
-        setVisible(true);
-         */
+        // add(a_panel);
+        // a_panel.add(a_button);
+        // a_panel.add(a_button2);
+        // a_panel.add(a_button3);     
+        // a_panel.add(openFileButton);
+        // a_panel.add(fileNameLabel);
+        // a_panel.add(a_button4);   
+        // a_panel.add(a_button5);
+
+        // a_button.addActionListener(this);
+        // a_button2.addActionListener(this);
+        // a_button3.addActionListener(this);
+        // openFileButton.addActionListener(this);
+        // a_button4.addActionListener(this);
+        // a_button5.addActionListener(this);
+
+        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setSize(600,300);
+        // setLocationRelativeTo(null);
+        // setVisible(true);
 
         //This can be removed later if we implement custom playlists
         saver.getHardCodedPlayList();
@@ -81,9 +79,6 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
 
         getVolume();
         initialiseFiles();
-
-        a_panel.add(a_timeSlider);
-
     }    
 
     public void initialiseFiles(){
@@ -202,17 +197,21 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     }
 
     public void setTime(Duration _time){
-        a_mediaPlayer.seek(_time.UNKNOWN);
         //Duration duration = new Duration(ONE);
         //a_mediaPlayer.seek(_time);
         //Slider progBar;
         //double time;
         //GUI gui = new GUI(); 
         //a_mediaPlayer.seek(_time.seconds((time.getValue() / 100)* a_mediaPlayer.getTotalDuration().toSeconds()));
+
         
-       
+        //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
+        //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration().multiply(time.getValue() / 100)); 
+        
+        a_mediaPlayer.getMedia().getDuration();
+        
     }
-    
+
     public Duration getTotalTime(){
         Duration duration = a_mediaPlayer.getTotalDuration();
         return duration;
