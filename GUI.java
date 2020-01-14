@@ -141,9 +141,12 @@ public class GUI extends JFrame implements ActionListener
         a_timeSlider.addChangeListener(new ChangeListener(){
                 public void stateChanged(ChangeEvent e)
                 {
-                    if (player.a_mediaPlayer != null){
+                    JSlider source = (JSlider)e.getSource();
+                    if (source.getValueIsAdjusting()){
                     
                     setTime();
+                    System.out.println("moving");
+
 
                     }
                     
