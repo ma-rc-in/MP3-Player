@@ -140,7 +140,15 @@ public class GUI extends JFrame implements ActionListener
 
         a_timeSlider.addChangeListener(new ChangeListener(){
                 public void stateChanged(ChangeEvent e)
-                {setTime();}});                              
+                {
+                    if (player.a_mediaPlayer != null){
+                    
+                    setTime();
+
+                    }
+                    
+                    
+                }});                              
 
         //timer, updates every 0.1 seconds
         ActionListener updateTime = new ActionListener()
