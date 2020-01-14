@@ -25,7 +25,7 @@
             private JScrollPane a_playlistSP = new JScrollPane(a_playlist);
         
             //sliders
-            private JSlider a_timeSlider = new JSlider();
+            public JSlider a_timeSlider = new JSlider();
             private JSlider a_volumeSlider = new JSlider();
         
             //pannels
