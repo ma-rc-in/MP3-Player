@@ -330,10 +330,8 @@ public class GUI extends JFrame implements ActionListener
     public void setTime()
     {
         double l_time = a_timeSlider.getValue();
-        Duration a_sliderDuration = new Duration(l_time);
-        //player.a_mediaPlayer.seek(player.a_mediaPlayer.getMedia().getDuration().seconds((a_timeSlider.getValue())* player.a_mediaPlayer.getTotalDuration().toSeconds())); 
-        player.a_mediaPlayer.seek(player.a_mediaPlayer.getMedia().getDuration().multiply(a_timeSlider.getValue() / 100)); 
-
+        Duration a_sliderDuration = new Duration(l_time);        
+        player.setTime(a_sliderDuration);
     }
 
     public void playlistDisplay() //need to call the method from somewhere

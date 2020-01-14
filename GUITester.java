@@ -208,8 +208,17 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
         //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration().multiply(time.getValue() / 100)); 
         
-        a_mediaPlayer.getMedia().getDuration();
+        //a_mediaPlayer.getMedia().getDuration();       
         
+       //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
+       
+       //_time= a_mediaPlayer.getCurrentTime();
+       
+       //a_mediaPlayer.seek(a_mediaPlayer.getMedia()._time); 
+       //player.a_mediaPlayer.seek(player.a_mediaPlayer.getMedia().getDuration().seconds((a_timeSlider.getValue())* player.a_mediaPlayer.getTotalDuration().toSeconds())); 
+       //Duration duration = a_mediaPlayer.getCurrentTime();
+       _time = a_mediaPlayer.getCurrentTime();
+       a_mediaPlayer.seek(_time.add(new Duration(1000)));
     }
 
     public Duration getTotalTime(){
