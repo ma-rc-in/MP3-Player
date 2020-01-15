@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.DefaultButtonModel;
 import javafx.util.Duration;
 import java.util.*;
+import javafx.scene.media.MediaPlayer.Status;
 
 public class GUITester extends JFrame implements ActionListener//, danPlayer
 {
@@ -32,6 +33,9 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
     private double getVolumeValue;
     private boolean mute;
     Media songPlay;
+
+    public int clickX;
+    public int calculate;
 
     private Duration dur;    
 
@@ -78,8 +82,8 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         }
 
         getVolume();
-        initialiseFiles();
-    }    
+        initialiseFiles();  
+    }        
 
     public void initialiseFiles(){
         JFXPanel fxPanel = new JFXPanel();
@@ -204,22 +208,28 @@ public class GUITester extends JFrame implements ActionListener//, danPlayer
         //GUI gui = new GUI(); 
         //a_mediaPlayer.seek(_time.seconds((time.getValue() / 100)* a_mediaPlayer.getTotalDuration().toSeconds()));
 
-        
         //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
         //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration().multiply(time.getValue() / 100)); 
-        
+
         //a_mediaPlayer.getMedia().getDuration();       
-        
-       //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
-       
-       //_time= a_mediaPlayer.getCurrentTime();
-       
-       //a_mediaPlayer.seek(a_mediaPlayer.getMedia()._time); 
-       //player.a_mediaPlayer.seek(player.a_mediaPlayer.getMedia().getDuration().seconds((a_timeSlider.getValue())* player.a_mediaPlayer.getTotalDuration().toSeconds())); 
-       //Duration duration = a_mediaPlayer.getCurrentTime();
-       _time = a_mediaPlayer.getCurrentTime();
-       a_mediaPlayer.seek(a_mediaPlayer.getStartTime().add(_time));       ///Duration sss = new Duration (_time);
-       //a_mediaPlayer.seek(_time.add(new Duration(_time)));
+
+        //a_mediaPlayer.seek(a_mediaPlayer.getMedia().getDuration()); 
+
+        //_time= a_mediaPlayer.getCurrentTime();
+
+        //a_mediaPlayer.seek(a_mediaPlayer.getMedia()._time); 
+        //player.a_mediaPlayer.seek(player.a_mediaPlayer.getMedia().getDuration().seconds((a_timeSlider.getValue())* player.a_mediaPlayer.getTotalDuration().toSeconds())); 
+        //Duration duration = a_mediaPlayer.getCurrentTime();
+        //_time = a_mediaPlayer.getCurrentTime();
+        //a_mediaPlayer.seek(a_mediaPlayer.getStartTime().add(_time));       
+        //Duration sss = new Duration (_time);
+        //a_mediaPlayer.seek(_time.add(new Duration(_time)));
+
+        //_time = a_mediaPlayer.getTotalDuration();
+        //a_mediaPlayer.seek(_time.multiply(a_mediaPlayer.startTimeProperty());
+        //GUI ui = new GUI(); 
+        //_time = a_mediaPlayer.getTotalDuration();
+        //a_mediaPlayer.seek(_time.multiply(ui.calculate/ui.a_timeSlider.getMaximum()));
     }
 
     public Duration getTotalTime(){

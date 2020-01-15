@@ -44,6 +44,10 @@ public class GUI extends JFrame implements ActionListener
     private boolean a_guiMute;
     private int a_playlistValue = 0;
 
+    public int clickX;
+    public int calculate;
+
+
     GUITester player = new GUITester(); //constructor for the player class
 
     public GUI()
@@ -138,20 +142,34 @@ public class GUI extends JFrame implements ActionListener
                 public void stateChanged(ChangeEvent e)
                 {setVolume();}});
 
+        /*
         a_timeSlider.addChangeListener(new ChangeListener(){
-                public void stateChanged(ChangeEvent e)
-                {
-                    JSlider source = (JSlider)e.getSource();
-                    if (source.getValueIsAdjusting()){
-                    
-                    setTime();
-                    System.out.println("moving");
+        public void stateChanged(ChangeEvent e)
+        {
+        JSlider source = (JSlider)e.getSource();
+        if (source.getValueIsAdjusting()){
 
+        setTime();
+        System.out.println("moving");
 
-                    }
+        }
                     
-                    
-                }});                              
+        }});
+
+         */
+
+        a_timeSlider.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent clicked) {
+                    clickX = clicked.getX();
+                    calculate = (int)Math.round((((double)clickX/(double)a_timeSlider.getWidth())*a_timeSlider.getMaximum()));
+                    a_timeSlider.setValue(calculate);  
+                    Duration seekLocation;
+                    seekLocation = player.a_mediaPlayer.getTotalDuration();
+                    player.a_mediaPlayer.seek(seekLocation.multiply(calculate/(double)a_timeSlider.getMaximum()));
+
+                     
+                }
+            });
 
         //timer, updates every 0.1 seconds
         ActionListener updateTime = new ActionListener()
@@ -337,14 +355,14 @@ public class GUI extends JFrame implements ActionListener
     }
 
     //***C Requirements***
-    
+
     public void setTime()
     {
-        double l_time = a_timeSlider.getValue();
-        Duration a_sliderDuration = new Duration(l_time);        
-        player.setTime(a_sliderDuration);
-    }
+        //double l_time = a_timeSlider.getValue();
+        //Duration a_sliderDuration = new Duration(l_time);        
+        //player.setTime(a_sliderDuration);
 
+    }
     public void playlistDisplay() //need to call the method from somewhere
     {
         model.removeAllElements();//ensures that the playlist 'screen' is clear before loading
