@@ -1,6 +1,6 @@
 # About the project
 
-This project provides an MP3 player with some basic functions, such as play, stop, next track, playlist, etc. It was created as part of a university programming module. 
+This project provides an MP3 player with some basic functions, such as play, stop, next track, playlist, etc. It was created as part of a programming module at university.
 
 ## Built With
 
